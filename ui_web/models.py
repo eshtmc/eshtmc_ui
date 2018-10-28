@@ -1,14 +1,28 @@
 from django.db import models
 from django.utils import timezone
-
+from django.contrib import admin
 # Create your models here.
+
+
+class Members(models.Model):
+    name = models.CharField(max_length=100)
+    # email = models.EmailField(max_length=100, default=None)
+    data_time = models.CharField(max_length=100, default=timezone.now)
+    on_activate = models.BooleanField()
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
 
 
 class MeetingInfo(models.Model):
     data = models.DateField()
     count = models.CharField(max_length=10)
     theme = models.CharField(max_length=100)
-    attendance = models.TextField()
+    attendance = models.ManyToManyField(Members, blank=True,verbose_name="attendance")
     best_table_topic_speaker = models.CharField(max_length=100)
     best_prepared_speaker = models.CharField(max_length=100)
     best_evaluator_speaker = models.CharField(max_length=100)
@@ -41,10 +55,3 @@ class Speakers(models.Model):
         return self.name
 
 
-class Members(models.Model):
-    name = models.CharField(max_length=100)
-    data_time = models.CharField(max_length=100, default=timezone.now)
-    on_activate = models.BooleanField()
-
-    def __unicode__(self):
-        return self.name
