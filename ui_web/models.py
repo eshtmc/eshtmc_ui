@@ -7,7 +7,7 @@ class Members(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, default=None)
     rank = models.CharField(max_length=20, default=None)
-    data_time = models.CharField(max_length=100, default=timezone.now)
+    date = models.DateField(default=timezone.now)
     on_activate = models.BooleanField()
 
     def __str__(self):
@@ -15,9 +15,11 @@ class Members(models.Model):
 
 
 class MeetingInfo(models.Model):
-    data = models.DateField()
+    date = models.DateField()
     count = models.IntegerField()
     theme = models.CharField(max_length=100)
+
+    empty_strings_allowed = True
     attendance = models.ManyToManyField(
         Members, blank=True, related_name="attendance")
     best_table_topic_speaker = models.ForeignKey(
@@ -52,13 +54,15 @@ class MeetingInfo(models.Model):
         Members, blank=True, related_name="individual_evaluator")
 
     def __str__(self):
-        return str(self.data) + "   #" + str(self.count) + "_" + self.theme
+        return str(self.date) + "   #" + str(self.count) + "_" + self.theme
 
 
 class Speakers(models.Model):
     role_takers = models.ForeignKey(MeetingInfo, on_delete=models.CASCADE)
     project_rank = models.CharField(max_length=10)
-    name = models.CharField(max_length=100)
+    speaker_name = models.ForeignKey(
+        Members,  related_name="speaker_name",
+        blank=True, on_delete=models.CASCADE)
     project_title = models.CharField(max_length=100)
 
     def __str__(self):
