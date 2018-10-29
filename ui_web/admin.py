@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ui_web.models import MeetingInfo, RoleTakers, Speakers, Members
+from ui_web.models import MeetingInfo, Speakers, Members
 
 # Register your models here.
 
@@ -14,7 +14,8 @@ class RoleTakersAdmin(admin.ModelAdmin):
 
 class MeetingInfoAdmin(admin.ModelAdmin):
 
-    filter_horizontal = ("attendance",)
+    filter_horizontal = ("attendance", "individual_evaluator")
+    # raw_id_fields = ('publisher',)
 
 
 class MembersAdmin(admin.ModelAdmin):
@@ -23,4 +24,4 @@ class MembersAdmin(admin.ModelAdmin):
 
 admin.site.register(Members, MembersAdmin)
 admin.site.register(MeetingInfo, MeetingInfoAdmin)
-admin.site.register(RoleTakers, RoleTakersAdmin)
+# admin.site.register(RoleTakers, RoleTakersAdmin)
