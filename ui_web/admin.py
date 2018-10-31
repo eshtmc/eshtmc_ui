@@ -24,7 +24,7 @@ class MeetingInfoAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         for key, value in model_to_dict(obj).items():
-            if value is None:
+            if key != "id" and value is None:
                 self.message_user(
                     request, "{0} will use the default value 'eshtmc'".format(key))
                 setattr(obj, key+"_id", Members.objects.get(name="eshtmc").id)
@@ -56,6 +56,16 @@ class MeetingInfoAdmin(admin.ModelAdmin):
                      model_to_dict(obj)["individual_evaluator"]])
                 meeting_info['date'] = ".".join(
                     str(meeting_info['date']).split('-'))
+
+                #  get the Speakers form the database
+                speaker_list = list()
+                speaker_dict = dict()
+                for speaker in Speakers.objects.filter(meeting_info_id=obj.id):
+                    speaker_dict["project_rank"] = speaker.project_rank
+                    speaker_dict["people_name"] = str(speaker.speaker_name)
+                    speaker_dict["project_name"] = speaker.project_title
+                    speaker_list.append(speaker_dict)
+                meeting_info['prepared_speakers'] = speaker_list
                 github_page(meeting_info)
             self.message_user(request, "changed in https://eshtmc.github.io/")
 
