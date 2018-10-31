@@ -1,6 +1,7 @@
 from django.contrib import admin
 from ui_web.models import MeetingInfo, Speakers, Members
 from django.forms.models import model_to_dict
+from .tool.eshtmc_data import github_page
 # from django.contrib import
 # Register your models here.
 
@@ -13,7 +14,9 @@ class MeetingInfoAdmin(admin.ModelAdmin):
     search_fields = ['theme', 'count']
     ordering = ['count']
     list_display = ('date', 'count', 'theme')
-    filter_horizontal = ("attendance", "individual_evaluator")
+    filter_horizontal = ("attendance",
+                         "individual_evaluator",
+                         "table_topic_speaker")
     date_hierarchy = 'date'
     list_per_page = 30
 
@@ -24,23 +27,37 @@ class MeetingInfoAdmin(admin.ModelAdmin):
             if value is None:
                 self.message_user(
                     request, "{0} will use the default value 'eshtmc'".format(key))
-                setattr(obj, key+"_id", 1)
-                # set the default value 1, it will be set eshtmc info
+                setattr(obj, key+"_id", Members.objects.get(name="eshtmc").id)
+                # set the default value eshtmc.id, it will be set eshtmc info
         super(MeetingInfoAdmin, self).save_model(request, obj, form, change)
 
     actions = ['create_new_info']
 
     def create_new_info(self, request, queryset):
+        if len(queryset) > 1:
+            self.message_user(
+                request, "nothing change, you can only choose one info")
+        else:
+            meeting_info = {}
+            for obj in queryset:
+                for key, value in vars(obj).items():
+                    if key.find("_id") != -1:
+                        value = Members.objects.get(id=value).name
+                    if key != "_state":
+                        meeting_info[key.split("_id")[0]] = value
 
-        for obj in queryset:
-            for key, value in vars(obj).items():
-                if key.split("_")[-1] == 'id':
-                    value = Members.objects.filter(
-                        id=value).values("name")[0].get("name")
-
-                print(key, value)
-        self.message_user(request, "changed in https://eshtmc.github.io/")
-        pass
+                meeting_info["attendance"] = ",".join(
+                    [str(x) for x in model_to_dict(obj)["attendance"]])
+                meeting_info["table_topic_speaker"] = ",".join(
+                    [str(x) for x in
+                     model_to_dict(obj)["table_topic_speaker"]])
+                meeting_info["individual_evaluator"] = ",".join(
+                    [str(x) for x in
+                     model_to_dict(obj)["individual_evaluator"]])
+                meeting_info['date'] = ".".join(
+                    str(meeting_info['date']).split('-'))
+                github_page(meeting_info)
+            self.message_user(request, "changed in https://eshtmc.github.io/")
 
     create_new_info.short_description = "create_new_info on the github page"
 

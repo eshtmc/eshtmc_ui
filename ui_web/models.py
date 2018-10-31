@@ -22,6 +22,10 @@ class MeetingInfo(models.Model):
     empty_strings_allowed = True
     attendance = models.ManyToManyField(
         Members, blank=True, related_name="attendance")
+
+    table_topic_speaker = models.ManyToManyField(
+        Members, blank=True, related_name="table_topic_speaker")
+
     best_table_topic_speaker = models.ForeignKey(
         Members, related_name="best_table_topic_speaker",
         blank=True, on_delete=models.CASCADE)
@@ -67,11 +71,10 @@ class MeetingInfo(models.Model):
 
 
 class Speakers(models.Model):
-    role_takers = models.ForeignKey(MeetingInfo, on_delete=models.CASCADE)
+    meeting_info = models.ForeignKey(MeetingInfo, on_delete=models.CASCADE)
     project_rank = models.CharField(max_length=10)
     speaker_name = models.ForeignKey(
-        Members,  related_name="speaker_name",
-        blank=True, on_delete=models.CASCADE,
+        Members,  related_name="speaker_name", on_delete=models.CASCADE,
         limit_choices_to={'on_activate': True})
     project_title = models.CharField(max_length=100)
 
