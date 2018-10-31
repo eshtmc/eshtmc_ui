@@ -1,13 +1,12 @@
 from django.contrib import admin
 from ui_web.models import MeetingInfo, Speakers, Members
+from django.forms.models import model_to_dict
 # from django.contrib import
 # Register your models here.
 
 
 class SpeakersInline(admin.TabularInline):
     model = Speakers
-
-# class RoleTakersAdmin(admin.ModelAdmin):
 
 
 class MeetingInfoAdmin(admin.ModelAdmin):
@@ -19,6 +18,15 @@ class MeetingInfoAdmin(admin.ModelAdmin):
     list_per_page = 30
 
     inlines = [SpeakersInline]
+
+    def save_model(self, request, obj, form, change):
+        for key, value in model_to_dict(obj).items():
+            if value is None:
+                self.message_user(
+                    request, "{0} will use the default value 'eshtmc'".format(key))
+                setattr(obj, key+"_id", 1)
+                # set the default value 1, it will be set eshtmc info
+        super(MeetingInfoAdmin, self).save_model(request, obj, form, change)
 
     actions = ['create_new_info']
 
