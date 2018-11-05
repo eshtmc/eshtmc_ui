@@ -4,7 +4,7 @@ MAINTAINER Saiun
 RUN mkdir eshtmc_ui
 ADD ./requestment.txt /
 
-RUN yum -y install epel-release && pip install -r requestment.txt -i http://mirrors.aliyun.com/pypi/simple/
+RUN yum update && yum -y install epel-release python-virtualenv python-pip && pip install -r requestment.txt -i http://mirrors.aliyun.com/pypi/simple/
 
 COPY . /eshtmc_ui
 
