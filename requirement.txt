@@ -3,4 +3,3 @@ bs4==0.0.1
 Django==2.0.9
 gunicorn==19.9.0
 pytz==2018.5
-uWSGI==2.0.17.1
