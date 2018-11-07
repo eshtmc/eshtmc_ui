@@ -38,6 +38,9 @@ class Agenda:
 `CC7` Siyuan Jia -  kubernetes say hello
 `P2` Elvis Jiang - Be like a man
         """
+        if not self.is_need_to_update(os.path.join(
+                self.config.md_path_dir, "speakers.md")):
+            return
         add_content = "### {0}, {1} ({2})   \n`TT` {3}  \n".format(self.md_type_data["count"], self.md_type_data["theme"],
                                                              self.md_type_data["date"],
                                                              self.md_type_data["speakers"]["TT"])
@@ -66,6 +69,9 @@ class Agenda:
 `Best Prepared Speech` Sarah Zhang
 `Best Evaluator` Jony
         """
+        if not self.is_need_to_update(os.path.join(
+                self.config.md_path_dir, "best-awards.md")):
+            return
         add_content = "### {0}, {1} ({2})   \n".format(
             self.md_type_data["count"],
             self.md_type_data["theme"],
@@ -92,6 +98,9 @@ class Agenda:
 `Timer` Wujie Zhang
 `Ah-Counter` Nrapendra Singh
         """
+        if not self.is_need_to_update(os.path.join(
+                self.config.md_path_dir, "role-takers.md")):
+            return
         add_content = "### {0}, {1} ({2})   \n".format(
             self.md_type_data["count"],
             self.md_type_data["theme"],
@@ -125,8 +134,8 @@ class Agenda:
             for j in i[1:]:
                 if j != 0:
                     sum += int(j)
-            print(i[0:1], sum, i)
-            print("test~")
+            # print(i[0:1], sum, i)
+            # print("test~")
 
         #  TODO up date the temp_head and data
         if self.md_type_data["date"] not in temp_head and temp_head != []:
@@ -221,6 +230,16 @@ class Agenda:
                     self.config.md_path_dir, "speakers.md"), "w") as f:
                 f.writelines(temp)
 
+    def is_need_to_update(self, filepath):
+        with open(filepath, "r") as f:
+            content = f.read()
+            if content.find(self.config.MEETING_DATE) != -1:
+                print("no need to update {0}".format(filepath))
+                return False
+            else:
+                print("updating {0}".format(filepath))
+                return True
+
 
 def github_page(config_dict):
     print(config_dict)
@@ -245,7 +264,29 @@ def github_page(config_dict):
         "Ah-counter": config_dict.get("ah_counter")
     }
 
-    # TODO change the  NEW_DIR_TIMR = "2018.10-2018.03"
+    #  change the  NEW_DIR_TIMR = "2018.10-2019.03"
+    # 2018.04-2018.09
+    # 2018.10-2019.03
+    # 2019.04-2019.09
+    yy, mm, dd = tuple(config_dict.get("date").split("."))
+    if 4 <= int(mm) <= 9:
+        Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(yy, yy)
+    else:
+        # (10 <= int(mm) <= 12) or (1 <= int(mm) <= 3)
+        Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(yy, str(int(yy) + 1))
+
+    Config.md_path_dir = "eshtmc.github.io/education/meetings/{0}/".format(
+        Config.NEW_DIR_TERM)
+
+    Config.INDEX_ADD = """
+### {0}
+[attendance](https://eshtmc.github.io/education/meetings/{0}/attendance.html)
+[best-awards](https://eshtmc.github.io/education/meetings/{0}/best-awards)
+[role-takers](https://eshtmc.github.io/education/meetings/{0}/role-takers)
+[speakers](https://eshtmc.github.io/education/meetings/{0}/speakers)
+        """.format(Config.NEW_DIR_TERM)
+    Config.Message = "update {0} #{1} {2}".format(
+        Config.MEETING_DATE, Config.MEETING_COUNT, Config.MEETING_THEME)
 
     tm = Eshtmc(Config)
     ag = Agenda(Config)
@@ -261,16 +302,4 @@ def github_page(config_dict):
 
     tm.git_add()
     tm.git_commit()
-
-
-    # tm.git_push()
-
-if __name__ == '__main__':
-    pass
-    # ag = Agenda(Config)
-    # ag.create_new_record()
-    # ag.save_json()
-    # ag.save_speakers()
-    # ag.save_best_awards()
-    # ag.save_role_takers()
-    # ag.save_attendance()
+    tm.git_push()

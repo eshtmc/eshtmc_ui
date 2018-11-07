@@ -1,7 +1,7 @@
 
 class Config:
 
-    NEW_DIR_TIMR = "2018.10-2018.03"
+    NEW_DIR_TERM = "2018.10-2018.03"
 
     MEETING_COUNT = 108
     MEETING_THEME = "Imagine"
@@ -87,7 +87,7 @@ class Config:
     """
 
     md_path_dir = "eshtmc.github.io/education/meetings/{0}/".format(
-        NEW_DIR_TIMR)
+        NEW_DIR_TERM)
 
     INDEX_ADD = """
 ### {0}
@@ -95,7 +95,7 @@ class Config:
 [best-awards](https://eshtmc.github.io/education/meetings/{0}/best-awards)
 [role-takers](https://eshtmc.github.io/education/meetings/{0}/role-takers)
 [speakers](https://eshtmc.github.io/education/meetings/{0}/speakers)
-    """.format(NEW_DIR_TIMR)
+    """.format(NEW_DIR_TERM)
 
     HTML_ATTENDANCE_head = """
 <!DOCTYPE html>
