@@ -11,6 +11,6 @@ WORKDIR /eshtmc_ui
 
 RUN python3 manage.py collectstatic
 
-CMD python3 manage.py migrate
+#CMD python3 manage.py migrate
 
 ENTRYPOINT gunicorn -c gunicorn.conf.py eshtmc_ui.wsgi:application

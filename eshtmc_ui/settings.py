@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'eshtmc_ui.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['ESHTMC_DB_NAME'],
-        'USER': os.environ['ESHTMC_DB_USER'],
-        'PASSWORD': os.environ['ESHTMC_DB_PASSWORD'],
-        'HOST': os.environ['ESHTMC_DB_HOST'],
-        'PORT': os.environ['ESHTMC_DB_PORT'],
+        'NAME': os.environ.get('ESHTMC_DB_NAME'),
+        'USER': os.environ.get('ESHTMC_DB_USER'),
+        'PASSWORD': os.environ.get('ESHTMC_DB_PASSWORD'),
+        'HOST': os.environ.get('ESHTMC_DB_HOST'),
+        'PORT': os.environ.get('ESHTMC_DB_PORT'),
     }
 }
 
