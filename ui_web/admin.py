@@ -59,8 +59,8 @@ class MeetingInfoAdmin(admin.ModelAdmin):
 
                 #  get the Speakers form the database
                 speaker_list = list()
-                speaker_dict = dict()
                 for speaker in Speakers.objects.filter(meeting_info_id=obj.id):
+                    speaker_dict = dict()
                     speaker_dict["project_rank"] = speaker.project_rank
                     speaker_dict["people_name"] = str(speaker.speaker_name)
                     speaker_dict["project_name"] = speaker.project_title
