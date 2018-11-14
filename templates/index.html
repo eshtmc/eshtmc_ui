@@ -1,26 +1,70 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <title>eshtmc</title>
-  </head>
-  <body>
+{#{% block title %}My amazing blog{% endblock %}#}
 
+{% block content %}
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{#    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>#}
-{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>#}
-  </body>
-</html>
+			<div class="jumbotron">
+				<h1>
+					Ericsson Shang Hai Toastmasters Club
+				</h1>
+				<p>
+关于我们:
+爱立信上海演讲俱乐部，成立于2014年5月25日。是既轻松又有个性的学习型组织
+</p><p>
+俱乐部使命:
+Speaking in Public to Empower YOU ME WE
+</p><p>
+会议时间:
+每两周的周五中午12:00~13:30举行俱乐部例会
+Biweekly Regular Meeting on Friday Noon
+</p><p>
+每两月的神秘周五中午12:00~13:00举行会员日
+Bimonthly Members' Day on One Friday Noon
+                </p>
+				<p>
+					 <a class="btn btn-primary btn-large" href="https://mp.weixin.qq.com/s/E21ojAyI2YSdL8Dejxwm7w">Learn more</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-4 column">
+			<h2>
+				Photos
+			</h2>
+			<p>
+                some photos in our meeting
+			</p>
+			<p>
+				 <a class="btn" href="http://eshtmc.com/meetings/">go »</a>
+			</p>
+		</div>
+		<div class="col-md-4 column">
+			<h2>
+				Meeting info
+			</h2>
+			<p>
+                some Meeting data on the github-page
+			</p>
+			<p>
+				 <a class="btn" href="https://eshtmc.github.io/">go »</a>
+			</p>
+		</div>
+		<div class="col-md-4 column">
+			<h2>
+				Officers info
+			</h2>
+			<p>
+                some Officers Meeting data on the github-page
+            </p>
+			<p>
+				 <a class="btn" href="https://shimo.im/">go »</a>
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -4,6 +4,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', views.index),
+    path('data', views.show_data),
+    path('members', views.members)
 
 ]
 

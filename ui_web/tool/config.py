@@ -60,28 +60,7 @@ class Config:
     New_Table = """<h1>Attendance</h1>
 <table class="table table-condensed table-bordered">
 <tr><th>Name</th></tr>
-<tr><th>Jenny Yu</th></tr>
-<tr><th>Huihui Jiang</th></tr>
-<tr><th>Jony Zheng</th></tr>
-<tr><th>Michelle Wang</th></tr>
-<tr><th>Dongchen Tang</th></tr>
-<tr><th>Michelle Hua</th></tr>
-<tr><th>Jane Gong</th></tr>
-<tr><th>Taowen Zhang</th></tr>
-<tr><th>Yi Fang</th></tr>
-<tr><th>Hongyu Qi</th></tr>
-<tr><th>Qingzhen Deng</th></tr>
-<tr><th>Siyuan Jia</th></tr>
-<tr><th>Michelle Jin</th></tr>
-<tr><th>Alice Huang</th></tr>
-<tr><th>Xin Feng</th></tr>
-<tr><th>Sarah Zhang</th></tr>
-<tr><th>Wujie Zhang</th></tr>
-<tr><th>Yao Fang</th></tr>
-<tr><th>Elvis Jiang</th></tr>
-<tr><th>Nrapendra Singh</th></tr>
-<tr><th>Hong Wang</th></tr>
-<tr><th>Jun Liu</th></tr>
+<tr><th>eshtmc</th></tr>
 <tr><th>Total</th></tr>
 </table>      
     """
