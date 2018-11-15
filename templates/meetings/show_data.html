@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 {#    {{ members }}#}
-    <table   class="table table-hover">
-      <caption>   Result of Query  </caption>
-            {% for member in members %}
-                <tr>
+{#    <table   class="table table-hover">#}
+{#      <caption>   Result of Query  </caption>#}
+{#            {% for member in members %}#}
+{#                <tr>#}
 {#                {{ member }}#}
-                {% for i in member %}
-                    <td>
-                    {{ i }}
-                    </td>
-                {% endfor %}
-                </tr>
-            {% endfor %}
-    </table>
+{#                {% for i in member %}#}
+{#                    <td>#}
+{#                    {{ i }}#}
+{#                    </td>#}
+{#                {% endfor %}#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#    </table>#}
 
+{% for jsfile_name in script_list %}
+<script src="{{host}}/{{jsfile_name}}.js"></script>
+{% endfor %}
+
+{{ pie|safe }}
 {% endblock %}
