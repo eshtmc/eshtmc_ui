@@ -1,23 +1,85 @@
 {% extends "base.html" %}
-{% block content %}
-{#    {{ members }}#}
-{#    <table   class="table table-hover">#}
-{#      <caption>   Result of Query  </caption>#}
-{#            {% for member in members %}#}
-{#                <tr>#}
-{#                {{ member }}#}
-{#                {% for i in member %}#}
-{#                    <td>#}
-{#                    {{ i }}#}
-{#                    </td>#}
-{#                {% endfor %}#}
-{#                </tr>#}
-{#            {% endfor %}#}
-{#    </table>#}
 
-{% for jsfile_name in script_list %}
+{% block content %}
+
+
+    <div class="container">
+  <h2>ESHTMC</h2>
+  <br>
+  <!-- Nav pills -->
+  <ul class="nav nav-pills" role="tablist">
+      <li class="nav-item">
+      <a class="nav-link active" data-toggle="pill" href="#wordcloud">Attendances</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#pie">Members_pie</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#bar">Attendances_bar</a>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#line">Attendances_line</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+      <div id="wordcloud" class="container tab-pane active"><br>
+   {% for jsfile_name in wordcloud_script_list %}
 <script src="{{host}}/{{jsfile_name}}.js"></script>
 {% endfor %}
+    {{ wordcloud|safe }}
+    </div>
 
-{{ pie|safe }}
+    <div id="pie" class="container tab-pane fade"><br>
+{% for jsfile_name in pie_script_list %}
+<script src="{{host}}/{{jsfile_name}}.js"></script>
+{% endfor %}
+    {{ pie|safe }}
+    </div>
+
+
+    <div id="bar" class="container tab-pane fade"><br>
+    {% for jsfile_name in bar_script_list %}
+<script src="{{host}}/{{jsfile_name}}.js"></script>
+{% endfor %}
+    {{ bar|safe }}
+    </div>
+
+
+      <div id="line" class="container tab-pane fade"><br>
+    {% for jsfile_name in line_script_list %}
+<script src="{{host}}/{{jsfile_name}}.js"></script>
+{% endfor %}
+          {{ line|safe }}
+    </div>
+  </div>
+</div>
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
