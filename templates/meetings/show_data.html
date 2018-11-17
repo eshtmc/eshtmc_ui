@@ -3,60 +3,64 @@
 {% block content %}
 
 
-    <div class="container">
-  <h2>ESHTMC</h2>
-  <br>
-  <!-- Nav pills -->
-  <ul class="nav nav-pills" role="tablist">
-      <li class="nav-item">
-      <a class="nav-link active" data-toggle="pill" href="#wordcloud">Attendances</a>
-    </li>
+    <div class="row ">
+        <div class="center-block">
+            <h2 class="text-center">Ericsson Shanghai Toastmasters Club</h2>
+            <br>
+            <!-- Nav pills -->
+            <div class="container">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill"
+                           href="#wordcloud">Attendances</a>
+                    </li>
 
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#pie">Members_pie</a>
-    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pie">Members_pie</a>
+                    </li>
 
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#bar">Attendances_bar</a>
-    </li>
-      <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#line">Attendances_line</a>
-    </li>
-  </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#bar">Attendances_bar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#line">Attendances_line</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Tab panes -->
+            <div class="tab-content center-block">
+                <div id="wordcloud" class="container tab-pane active"><br>
+                    {% for jsfile_name in wordcloud_script_list %}
+                        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+                    {% endfor %}
+                    {{ wordcloud|safe }}
+                </div>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-      <div id="wordcloud" class="container tab-pane active"><br>
-   {% for jsfile_name in wordcloud_script_list %}
-<script src="{{host}}/{{jsfile_name}}.js"></script>
-{% endfor %}
-    {{ wordcloud|safe }}
+                <div id="pie" class="container tab-pane fade"><br>
+                    {% for jsfile_name in pie_script_list %}
+                        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+                    {% endfor %}
+                    {{ pie|safe }}
+                </div>
+
+
+                <div id="bar" class="container tab-pane fade"><br>
+                    {% for jsfile_name in bar_script_list %}
+                        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+                    {% endfor %}
+                    {{ bar|safe }}
+                </div>
+
+
+                <div id="line" class="container tab-pane fade"><br>
+                    {% for jsfile_name in line_script_list %}
+                        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+                    {% endfor %}
+                    {{ line|safe }}
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="pie" class="container tab-pane fade"><br>
-{% for jsfile_name in pie_script_list %}
-<script src="{{host}}/{{jsfile_name}}.js"></script>
-{% endfor %}
-    {{ pie|safe }}
-    </div>
-
-
-    <div id="bar" class="container tab-pane fade"><br>
-    {% for jsfile_name in bar_script_list %}
-<script src="{{host}}/{{jsfile_name}}.js"></script>
-{% endfor %}
-    {{ bar|safe }}
-    </div>
-
-
-      <div id="line" class="container tab-pane fade"><br>
-    {% for jsfile_name in line_script_list %}
-<script src="{{host}}/{{jsfile_name}}.js"></script>
-{% endfor %}
-          {{ line|safe }}
-    </div>
-  </div>
-</div>
 
 {% endblock %}
 

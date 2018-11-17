@@ -67,3 +67,7 @@ def show_data(request):
 def members(request):
     members = Members.objects.values_list()
     return render(request, 'members/members.html', {'members': members})
+
+def meetings(request):
+    meetings_info= MeetingInfo.objects.values_list()
+    return render(request, 'meetings/meetings.html', {'members': meetings_info})
