@@ -273,7 +273,10 @@ def github_page(config_dict):
         Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(yy, yy)
     else:
         # (10 <= int(mm) <= 12) or (1 <= int(mm) <= 3)
-        Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(yy, str(int(yy) + 1))
+        if 1 <= int(mm) <= 3:
+            Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(str(int(yy) - 1), yy)
+        else:
+            Config.NEW_DIR_TERM = "{0}.10-{1}.03".format(yy, str(int(yy) + 1))
 
     Config.md_path_dir = "eshtmc.github.io/education/meetings/{0}/".format(
         Config.NEW_DIR_TERM)
